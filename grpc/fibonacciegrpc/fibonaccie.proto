@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package fibonaccie;
+
+
+option go_package = "/fibonacciegrpc";
+
+service Fibonaccie {
+  rpc GetFibonacciStream(Range) returns (stream FibonaccieItems) {}
+}
+
+message Range {
+  int32 x = 1;
+  int32 y = 2;
+}
+message  FibonaccieItems{
+  uint64 item = 1;
+}
