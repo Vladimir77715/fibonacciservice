@@ -7,7 +7,7 @@ import (
 
 func FibonacciSlice(x int, y int) ([]uint64, error) {
 	if y-x < 0 {
-		return nil, errors.New(fmt.Sprintf("Левая граница %v больше чем правая %v", x, y))
+		return nil, errors.New(fmt.Sprintf("Левая граница x: %v больше чем правая y: %v", x, y))
 	}
 	var res []uint64
 
