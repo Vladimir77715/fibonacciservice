@@ -10,9 +10,14 @@ import (
 func main() {
 	cp, err := config.ParseConfig("conf.json")
 	if err != nil {
+		println(err.Error())
 		return
 	}
 	cals, err := cp.GetCallUrls()
+	if err != nil {
+		println(err.Error())
+		return
+	}
 	for _, v := range cals {
 		resp, e := http.Get(v)
 		if e != nil {
