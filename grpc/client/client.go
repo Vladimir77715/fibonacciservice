@@ -51,10 +51,10 @@ func main() {
 		for {
 			feature, e := str.Recv()
 			if e != nil {
-				println(e.Error())
+				log.Fatalf(e.Error())
 				break
 			}
-			println(feature.Item, e)
+			log.Println(feature.Item, e)
 		}
 	}()
 }
