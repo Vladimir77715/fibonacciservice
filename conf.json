@@ -1,0 +1,21 @@
+{
+  "server": {
+    "protocol": "http",
+    "host": "localhost",
+    "port": "8080"
+  },
+  "methods" : [ {
+    "method": "fibonacci/fibonacciSlice",
+    "args": {
+      "x": 1,
+      "y": 2
+    }
+  },
+    {
+      "method": "fibonacci/fibonacciSlice",
+      "args": {
+        "x": 6,
+        "y": 17
+      }
+    }]
+}
