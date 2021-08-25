@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.26.0
 // 	protoc        v3.17.3
-// source: fibonaccie.proto
+// source: server.proto
 
 package fibonacciegrpc
 
@@ -155,12 +155,12 @@ func file_fibonaccie_proto_rawDescGZIP() []byte {
 
 var file_fibonaccie_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_fibonaccie_proto_goTypes = []interface{}{
-	(*Range)(nil),           // 0: fibonaccie.Range
-	(*FibonaccieItems)(nil), // 1: fibonaccie.FibonaccieItems
+	(*Range)(nil),           // 0: server.Range
+	(*FibonaccieItems)(nil), // 1: server.FibonaccieItems
 }
 var file_fibonaccie_proto_depIdxs = []int32{
-	0, // 0: fibonaccie.Fibonaccie.GetFibonacciStream:input_type -> fibonaccie.Range
-	1, // 1: fibonaccie.Fibonaccie.GetFibonacciStream:output_type -> fibonaccie.FibonaccieItems
+	0, // 0: server.Fibonaccie.GetFibonacciStream:input_type -> server.Range
+	1, // 1: server.Fibonaccie.GetFibonacciStream:output_type -> server.FibonaccieItems
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
