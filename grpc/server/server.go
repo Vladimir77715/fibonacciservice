@@ -1,15 +1,17 @@
-package main
+package grpc
 
 import (
 	"errors"
-	fb "fibonacciservice/fibonacci"
-	"fibonacciservice/grpc/fibonacciegrpc"
-	"flag"
 	"fmt"
+	fb "github.com/Vladimir77715/fibonacciservice/fibonacci"
+	"github.com/Vladimir77715/fibonacciservice/grpc/fibonacciegrpc"
+	"github.com/Vladimir77715/fibonacciservice/redis/fibonaccicashed"
 	"google.golang.org/grpc"
 	"io"
 	"log"
 	"net"
+	"os"
+	"strconv"
 )
 
 func newServer() *FibonaccieServer {
@@ -19,13 +21,20 @@ func newServer() *FibonaccieServer {
 
 type FibonaccieServer struct {
 	fibonacciegrpc.UnimplementedFibonaccieServer
+	cs *fibonaccicashed.CashedService
 }
 
-func (*FibonaccieServer) GetFibonacciStream(r *fibonacciegrpc.Range, fs fibonacciegrpc.Fibonaccie_GetFibonacciStreamServer) error {
+func (f *FibonaccieServer) GetFibonacciStream(r *fibonacciegrpc.Range, fs fibonacciegrpc.Fibonaccie_GetFibonacciStreamServer) error {
 	if r == nil {
 		return errors.New("GetFibonacciStream : Пустой Range")
 	}
-	fibSlice, err := fb.FibonacciSlice(int(r.X), int(r.Y))
+	var fibSlice []uint64
+	var err error
+	if f.cs != nil {
+		fibSlice, err = f.cs.FibonacciSlice(int(r.X), int(r.Y))
+	} else {
+		fibSlice, err = fb.FibonacciSlice(int(r.X), int(r.Y), nil)
+	}
 	if err != nil {
 		return err
 	}
@@ -36,12 +45,16 @@ func (*FibonaccieServer) GetFibonacciStream(r *fibonacciegrpc.Range, fs fibonacc
 }
 
 var (
-	port = flag.Int("port", 10000, "The server port")
+	port = 10000 //"The def grpc server port"
 )
 
-func main() {
-	flag.Parse()
-	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", *port))
+func InitGrpcServer(cs *fibonaccicashed.CashedService) {
+	if p, err := strconv.Atoi(os.Getenv("GRPC_PORT")); err == nil {
+		log.Printf("GRPC_PORT is: %v", p)
+		port = p
+	}
+
+	lis, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%v", port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}

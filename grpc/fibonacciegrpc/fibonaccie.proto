@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package fibonaccie;
+package fibonacciegrpc;
 
 
-option go_package = "/fibonacciegrpc";
+option go_package = "github.com/Vladimir77715/fibonacciservice/grpc/fibonacciegrpc";
 
 service Fibonaccie {
   rpc GetFibonacciStream(Range) returns (stream FibonaccieItems) {}

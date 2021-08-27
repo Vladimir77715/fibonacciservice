@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"fibonacciservice/grpc/fibonacciegrpc"
 	"flag"
+	"github.com/Vladimir77715/fibonacciservice/grpc/fibonacciegrpc"
 	"google.golang.org/grpc"
 	"log"
 	"os"

@@ -30,7 +30,7 @@ func NewFibonaccieClient(cc grpc.ClientConnInterface) FibonaccieClient {
 }
 
 func (c *fibonaccieClient) GetFibonacciStream(ctx context.Context, in *Range, opts ...grpc.CallOption) (Fibonaccie_GetFibonacciStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Fibonaccie_ServiceDesc.Streams[0], "/server.Fibonaccie/GetFibonacciStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Fibonaccie_ServiceDesc.Streams[0], "/fibonacciegrpc.Fibonaccie/GetFibonacciStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +114,7 @@ func (x *fibonaccieGetFibonacciStreamServer) Send(m *FibonaccieItems) error {
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Fibonaccie_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "server.Fibonaccie",
+	ServiceName: "fibonacciegrpc.Fibonaccie",
 	HandlerType: (*FibonaccieServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
@@ -124,5 +124,5 @@ var Fibonaccie_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "server.proto",
+	Metadata: "fibonaccie.proto",
 }

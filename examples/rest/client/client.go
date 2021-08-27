@@ -2,8 +2,8 @@ package main
 
 import (
 	"bytes"
-	"fibonacciservice/rest/client/config"
 	"fmt"
+	"github.com/Vladimir77715/fibonacciservice/examples/rest/client/config"
 	"net/http"
 )
 

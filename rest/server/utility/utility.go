@@ -2,6 +2,7 @@ package utility
 
 import (
 	"fmt"
+	"github.com/Vladimir77715/fibonacciservice/redis/fibonaccicashed"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -9,16 +10,18 @@ import (
 
 type GinWrapper struct {
 	RouterGroup *gin.RouterGroup
+	Cs          *fibonaccicashed.CashedService
 }
 type GinWrapperContext struct {
 	Context *gin.Context
+	Cs      *fibonaccicashed.CashedService
 }
 
 type HandlerFunction func(wrapper *GinWrapperContext)
 
 func (gw *GinWrapper) GET(relativePath string, hf HandlerFunction) {
 	gw.RouterGroup.GET(relativePath, func(context *gin.Context) {
-		hf(&GinWrapperContext{Context: context})
+		hf(&GinWrapperContext{Context: context, Cs: gw.Cs})
 	})
 }
 
