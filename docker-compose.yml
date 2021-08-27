@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  web:
+  fibanacci:
     build: .
     ports:
       - "10000:10000"

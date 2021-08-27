@@ -1,7 +1,6 @@
 package fibonaccicashed
 
 import (
-	"fmt"
 	"github.com/Vladimir77715/fibonacciservice/fibonacci"
 	"github.com/Vladimir77715/fibonacciservice/redis/client"
 	"strconv"
@@ -84,12 +83,4 @@ func (cs *CashedService) FibonacciSlice(x int, y int) ([]uint64, error) {
 	var entitySlice, isAllNil = cs.getRedisEntityMap(x, size)
 	println(entitySlice)
 	return cs.fibonacciSlice(x, y, size, isAllNil, nil)
-}
-
-func interfaceToUint64(v interface{}) (uint64, error) {
-	vv, ee := strconv.ParseUint(fmt.Sprintf("%v", v), 10, 64)
-	if ee == nil {
-		return vv, nil
-	}
-	return 0, ee
 }
