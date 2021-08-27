@@ -40,7 +40,7 @@ Then run command
 
 ## Rest client
 
-When the server is started go to the exaples/grpc/client
+When the server is started go to the exaples/rest/client
 Then run command 
  ```console
   go run client.go 
